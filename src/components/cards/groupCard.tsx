@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { app, analytics, db } from "../../firebase";
+import { useEffect, useState } from "react";
+import { db } from "../../firebase";
 import { collection, doc, getDocs } from "firebase/firestore";
 import Sidebar from "./sidebar";
 import FilterDropdown from "../filterPost";
