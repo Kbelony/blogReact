@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { db } from "../../firebase.js";
+import { collection, getDocs } from "firebase/firestore";
 import Sidebar from "./sidebar";
 import FilterDropdown from "../filterPost";
 import Breadcrumbs from "../breadcrumbs";
@@ -16,7 +16,15 @@ function GroupCard() {
 
   const getPosts = async () => {
     const data = await getDocs(postCollectionRef);
-    setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setPostList(
+      data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+        thumbnail: doc.data().thumbnail,
+        description: doc.data().description,
+        tease: doc.data().tease, // Ajoutez cette ligne pour inclure la propriété 'tease'
+      }))
+    );
   };
 
   const getTease = async () => {
@@ -29,7 +37,7 @@ function GroupCard() {
     getTease();
   }, []);
 
-  const handleTeaseClick = (title) => {
+  const handleTeaseClick = (title: string) => {
     setSelectedTease(title);
   };
 
