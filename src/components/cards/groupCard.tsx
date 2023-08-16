@@ -7,7 +7,17 @@ import Breadcrumbs from "../breadcrumbs";
 import { Link } from "react-router-dom";
 
 function GroupCard() {
-  const [postLists, setPostList] = useState([]);
+  const [postLists, setPostList] = useState<
+    {
+      id: string;
+      thumbnail: string;
+      description: string;
+      tease: string;
+      title: string; // Nouvelle propriété
+      date: string; // Nouvelle propriété
+    }[]
+  >([]);
+
   const postCollectionRef = collection(db, "posts");
   const [selectedTease, setSelectedTease] = useState("");
 
@@ -22,7 +32,9 @@ function GroupCard() {
         id: doc.id,
         thumbnail: doc.data().thumbnail,
         description: doc.data().description,
-        tease: doc.data().tease, // Ajoutez cette ligne pour inclure la propriété 'tease'
+        tease: doc.data().tease,
+        title: doc.data().title,
+        date: doc.data().date,
       }))
     );
   };
