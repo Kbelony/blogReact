@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { app, analytics, db } from "../../firebase";
+import { useEffect, useState } from "react";
+import { db } from "../firebase";
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { DocumentData, doc, getDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faUpLong } from "@fortawesome/free-solid-svg-icons";
 
 function ReadPost() {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState<DocumentData | null>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
-      const postDoc = await getDoc(doc(db, "posts", id));
-      setPost(postDoc.data());
+      const postDoc = await getDoc(doc(db, "posts", id ?? ""));
+      setPost(postDoc?.data() ?? null);
     };
 
     fetchPost();
@@ -41,7 +40,6 @@ function ReadPost() {
                 <img
                   src="https://picsum.photos/200"
                   alt="Logo writer"
-                  srcset=""
                   className="rounded-circle"
                 />
                 <p>John.D</p>
@@ -57,7 +55,6 @@ function ReadPost() {
             <img
               src={post.thumbnail}
               alt="Post img thumbnail"
-              srcset=""
               className="mx-auto d-block "
             />
           </div>

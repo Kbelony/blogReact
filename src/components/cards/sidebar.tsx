@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { app, analytics, db } from "../../firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
-import FilterDropdown from "../filterPost";
+import { ReactNode, useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHammer,
@@ -10,20 +9,37 @@ import {
   faVirus,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Sidebar({ setSelectedTease }) {
-  const [teaseLists, setTeaseList] = useState([]);
+function Sidebar({
+  setSelectedTease,
+}: {
+  setSelectedTease: (title: string) => void;
+}) {
+  const [teaseLists, setTeaseList] = useState<
+    Array<{
+      title: ReactNode;
+      icon: string;
+      id: string;
+    }>
+  >([]);
   const teaseCollectionRef = collection(db, "tease");
 
   const getTease = async () => {
     const data = await getDocs(teaseCollectionRef);
-    setTeaseList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setTeaseList(
+      data.docs.map((doc) => ({
+        ...doc.data(),
+        title: doc.data().title,
+        icon: doc.data().icon,
+        id: doc.id,
+      }))
+    );
   };
 
   useEffect(() => {
     getTease();
   }, []);
 
-  const handleTeaseClick = (title) => {
+  const handleTeaseClick = (title: string) => {
     setSelectedTease(title);
     console.log(title);
   };
@@ -85,7 +101,7 @@ function Sidebar({ setSelectedTease }) {
                   )}
                 </div>
                 <div className="col-11">
-                  <a onClick={() => handleTeaseClick(tease.title)}>
+                  <a onClick={() => handleTeaseClick(String(tease.title))}>
                     {tease.title}
                   </a>
                 </div>

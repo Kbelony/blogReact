@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase.js";
+import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Sidebar from "./sidebar";
-import FilterDropdown from "../filterPost";
+// import FilterDropdown from "../filterPost";
 import Breadcrumbs from "../breadcrumbs";
 import { Link } from "react-router-dom";
 
@@ -21,8 +21,8 @@ function GroupCard() {
   const postCollectionRef = collection(db, "posts");
   const [selectedTease, setSelectedTease] = useState("");
 
-  const [teaseLists, setTeaseList] = useState([]);
-  const teaseCollectionRef = collection(db, "tease");
+  // const [teaseLists, setTeaseList] = useState<{ id: string }[]>([]);
+  // const teaseCollectionRef = collection(db, "tease");
 
   const getPosts = async () => {
     const data = await getDocs(postCollectionRef);
@@ -39,19 +39,19 @@ function GroupCard() {
     );
   };
 
-  const getTease = async () => {
-    const data = await getDocs(teaseCollectionRef);
-    setTeaseList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  // const getTease = async () => {
+  //   const data = await getDocs(teaseCollectionRef);
+  //   setTeaseList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  // };
 
   useEffect(() => {
     getPosts();
-    getTease();
+    // getTease();
   }, []);
 
-  const handleTeaseClick = (title: string) => {
-    setSelectedTease(title);
-  };
+  // const handleTeaseClick = (title: string) => {
+  //   setSelectedTease(title);
+  // };
 
   const filteredPosts = postLists.filter(
     (post) => selectedTease === "" || post.tease === selectedTease
@@ -61,10 +61,10 @@ function GroupCard() {
     <div className="row">
       <div className="col-sm-12 col-md-12 col-lg-9">
         <Breadcrumbs />
-        <FilterDropdown
+        {/* <FilterDropdown
           teaseLists={teaseLists}
           handleTeaseClick={handleTeaseClick}
-        />
+        /> */}
         <div className="row row-cols-1 row-cols-md-1 g-4">
           {filteredPosts.map((post) => (
             <div className="col" key={post.id}>

@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
-import { app, analytics, db } from "../firebase";
+import { useRef } from "react";
+import { db } from "../components/firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 const footer = () => {
   const emailRef = useRef<HTMLInputElement>(null);
-  const handleSave = async (e) => {
+  const handleSave = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(emailRef);
     const data = {

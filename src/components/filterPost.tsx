@@ -8,7 +8,26 @@ import {
   faFilter,
 } from "@fortawesome/free-solid-svg-icons";
 
-function FilterDropdown({ teaseLists, handleTeaseClick }) {
+interface Tease {
+  id: React.Key | null | undefined;
+  icon: string;
+  title:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | Iterable<React.ReactNode>
+    | React.ReactPortal
+    | null
+    | undefined;
+}
+
+interface FilterDropdownProps {
+  teaseLists: Tease[];
+  handleTeaseClick: (title: string | number | boolean) => void;
+}
+
+function FilterDropdown({ teaseLists, handleTeaseClick }: FilterDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,7 +47,7 @@ function FilterDropdown({ teaseLists, handleTeaseClick }) {
         </button>
         <div className={`collapse ${isOpen ? "show" : ""}`} id="filterCollapse">
           <div className="card card-body">
-            {teaseLists.map((tease) => (
+            {teaseLists.map((tease: Tease) => (
               <div key={tease.id}>
                 <div>
                   {tease.icon === "faScaleBalanced" && (
@@ -43,7 +62,17 @@ function FilterDropdown({ teaseLists, handleTeaseClick }) {
                   {tease.icon === "faHammer" && (
                     <FontAwesomeIcon icon={faHammer} />
                   )}
-                  <a onClick={() => handleTeaseClick(tease.title)}>
+                  <a
+                    onClick={() => {
+                      if (
+                        typeof tease.title === "string" ||
+                        typeof tease.title === "number" ||
+                        typeof tease.title === "boolean"
+                      ) {
+                        handleTeaseClick(tease.title);
+                      }
+                    }}
+                  >
                     {tease.title}
                   </a>
                 </div>

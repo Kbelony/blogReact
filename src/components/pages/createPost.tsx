@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { app, analytics, db } from "../../firebase";
+import { useEffect, useRef, useState } from "react";
+import { db } from "../firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -18,20 +18,32 @@ const createPost = () => {
   const thumbnailRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const summaryRef = useRef<HTMLInputElement>(null);
-  const [teaseLists, setTeaseList] = useState([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [teaseLists, setTeaseList] = useState<
+    Array<{
+      title: string | number | readonly string[] | undefined;
+      id: string;
+    }>
+  >([]);
 
   const teaseCollectionRef = collection(db, "tease");
 
   const getTease = async () => {
     const data = await getDocs(teaseCollectionRef);
-    setTeaseList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setTeaseList(
+      data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+        title: doc.data().title,
+      }))
+    );
   };
 
   useEffect(() => {
     getTease();
   }, []);
 
-  const handleSave = async (e) => {
+  const handleSave = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const data = {
       date: formattedDate,

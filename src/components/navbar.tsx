@@ -1,4 +1,3 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
@@ -35,13 +34,13 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
-                <a className="nav-link mx-2" href="/create">
+                <a className="nav-link mx-2" href="blogReact/create">
                   <FontAwesomeIcon icon={faPlus} />
                   Create
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2" href="/delete">
+                <a className="nav-link mx-2" href="blogReact/delete">
                   <FontAwesomeIcon icon={faMinus} />
                   Delete
                 </a>
