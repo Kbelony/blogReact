@@ -10,10 +10,10 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light navbar-light mb-3">
       <div className="container">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand" href="https://kbelony.github.io/blogReact/">
           <img
-            id="MDB-logo"
-            src="src/assets/img/644675a548d743835ff3937c_LogoNom-p-500.png"
+            id="Logo"
+            src="https://uploads-ssl.webflow.com/63f29d4eb366b713474ba881/6446760426bdb95288c586ef_LogoNomWhite.png"
             alt="Logo"
             draggable="false"
             height="30"

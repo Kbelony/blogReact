@@ -25,7 +25,7 @@ function ReadPost() {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <a href="https://kbelony.github.io/blogReact/">Home</a>
               </li>
               <li className="breadcrumb-item active">{post.tease}</li>
               <li className="breadcrumb-item active" aria-current="page">
