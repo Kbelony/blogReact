@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import CreatePost from "./components/pages/createPost";
 import DeletePost from "./components/pages/deletePost";
 import ReadPost from "./components/pages/readPost";
+import Explain from "./components/pages/explain";
 
 function App() {
   const isLocalhost =
@@ -31,6 +32,11 @@ function App() {
           </>
         )}
         <Route path="/read/:id" element={<ReadPost />}></Route>
+        <Route path="blogReact/explanation" element={<Explain />}></Route>
+        <Route
+          path="blogReact/blogReact/explanation"
+          element={<Explain />}
+        ></Route>
       </Routes>
       <Footer />
     </div>

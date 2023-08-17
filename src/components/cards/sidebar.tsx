@@ -120,10 +120,10 @@ function Sidebar({
         </a>
       </div>
       <div className="explainationbar">
-        <h5>Lien utile</h5>
+        <h5>Explication projet</h5>
         <div className="explainationtext">
           Ce projet m'a permis d'apprendre <b>React</b> en autodidacte en
-          l'espace de deux semaines
+          l'espace de deux semaines :<a href="/explanation">En savoir plus</a>
         </div>
       </div>
     </div>
