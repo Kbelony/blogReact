@@ -32,7 +32,7 @@ function App() {
           </>
         )}
         <Route path="/read/:id" element={<ReadPost />}></Route>
-        <Route path="blogReact/explanation" element={<Explain />}></Route>
+        <Route path="/explanation" element={<Explain />}></Route>
         <Route
           path="blogReact/blogReact/explanation"
           element={<Explain />}
